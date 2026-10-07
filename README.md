@@ -2,6 +2,8 @@
 
 **A URL shortener with real-time click analytics.** You can create branded short links, generate QR codes, and see who clicks: referrers, countries, cities, devices, browsers and operating systems. Bot traffic is filtered out.
 
+**[Live demo](https://linkpulse-lalit.vercel.app)** · demo login `demo@linkpulse.dev` / `demo1234`
+
 LinkPulse is a single full-stack Next.js app. It covers the usual pieces of a SaaS product: authentication, a fast redirect path, analytics queries in Postgres, a REST API with hashed keys and rate limiting, tests that run against a real database, Docker, and CI.
 
 ![Analytics dashboard](docs/screenshots/dashboard-light.png)
