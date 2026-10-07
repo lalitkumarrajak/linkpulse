@@ -1,0 +1,90 @@
+// LinkPulse data model
+// Docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String?
+  passwordHash String?
+  githubId     String?  @unique
+  avatarUrl    String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  links   Link[]
+  apiKeys ApiKey[]
+}
+
+model Link {
+  id            String    @id @default(cuid())
+  userId        String
+  slug          String    @unique
+  url           String
+  title         String?
+  tags          String[]  @default([])
+  passwordHash  String?
+  expiresAt     DateTime?
+  disabled      Boolean   @default(false)
+  clickCount    Int       @default(0)
+  lastClickedAt DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  clicks Click[]
+
+  @@index([userId, createdAt(sort: Desc)])
+  @@index([tags], type: Gin)
+}
+
+model Click {
+  id        BigInt   @id @default(autoincrement())
+  linkId    String
+  createdAt DateTime @default(now())
+  visitorId String
+  referrer  String   @default("Direct")
+  country   String   @default("Unknown")
+  region    String   @default("Unknown")
+  city      String   @default("Unknown")
+  device    String   @default("Desktop")
+  browser   String   @default("Unknown")
+  os        String   @default("Unknown")
+
+  link Link @relation(fields: [linkId], references: [id], onDelete: Cascade)
+
+  @@index([linkId, createdAt])
+  @@index([createdAt])
+}
+
+model ApiKey {
+  id         String    @id @default(cuid())
+  userId     String
+  name       String
+  prefix     String
+  keyHash    String    @unique
+  lastUsedAt DateTime?
+  revokedAt  DateTime?
+  createdAt  DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+/// Fixed-window counters used by the Postgres-backed rate limiter.
+model RateLimit {
+  key     String   @id
+  count   Int
+  resetAt DateTime
+
+  @@index([resetAt])
+}

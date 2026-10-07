@@ -1,0 +1,128 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #fafaf9;
+  --foreground: #0b0b0b;
+  --card: #ffffff;
+  --card-foreground: #0b0b0b;
+  --muted: #f3f3f1;
+  --muted-foreground: #5f5e5a;
+  --border: #e6e5e1;
+  --input: #dddcd7;
+  --ring: #2a78d6;
+  --primary: #2a78d6;
+  --primary-hover: #256abf;
+  --primary-foreground: #ffffff;
+  --accent: #eef4fc;
+  --accent-foreground: #1c5cab;
+  --destructive: #d03b3b;
+  --destructive-foreground: #ffffff;
+  --success: #0f7b3f;
+  --warning: #a35f00;
+
+  /* Chart roles (validated categorical slots 1–2, see README) */
+  --chart-surface: #ffffff;
+  --chart-grid: #ecebe7;
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --bar-track: #eef4fc;
+}
+
+.dark {
+  --background: #0e0e0d;
+  --foreground: #f5f5f4;
+  --card: #171716;
+  --card-foreground: #f5f5f4;
+  --muted: #222220;
+  --muted-foreground: #a3a29b;
+  --border: #2a2a28;
+  --input: #3a3a37;
+  --ring: #3987e5;
+  --primary: #3987e5;
+  --primary-hover: #5598e7;
+  --primary-foreground: #ffffff;
+  --accent: #172538;
+  --accent-foreground: #9ec5f4;
+  --destructive: #e66767;
+  --destructive-foreground: #0e0e0d;
+  --success: #4ccb7f;
+  --warning: #f0b43c;
+
+  --chart-surface: #171716;
+  --chart-grid: #2a2a28;
+  --series-1: #3987e5;
+  --series-2: #d95926;
+  --bar-track: #1b2a3d;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-series-1: var(--series-1);
+  --color-series-2: var(--series-2);
+  --color-bar-track: var(--bar-track);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  --animate-in: fade-in 160ms ease-out;
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(4px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background: var(--background);
+    color: var(--foreground);
+    font-feature-settings: "cv11", "ss01";
+  }
+  ::selection {
+    background: color-mix(in oklab, var(--primary) 25%, transparent);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+@utility tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--foreground) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--foreground) 6%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+}

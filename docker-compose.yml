@@ -1,0 +1,45 @@
+# Local production-like stack: Postgres + one-off migrate/seed job + the app.
+#   docker compose up --build   ->  http://localhost:3300
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: linkpulse
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d linkpulse"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+
+  migrate:
+    build:
+      context: .
+      target: migrator
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/linkpulse
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  app:
+    build:
+      context: .
+      target: runner
+    ports:
+      - "${APP_PORT:-3300}:3000"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/linkpulse
+      AUTH_SECRET: ${AUTH_SECRET:-change-me-in-production-please-32-chars-min}
+      APP_URL: ${APP_URL:-http://localhost:3300}
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+volumes:
+  pgdata:
