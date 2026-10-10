@@ -55,7 +55,7 @@ export default async function MarketingLayout({ children }: { children: React.Re
             <span className="hidden sm:inline">·</span>
             <span>
               Built by{" "}
-              <a href="https://github.com/rajak312" className="font-medium text-foreground hover:underline">
+              <a href="https://github.com/lalitkumarrajak" className="font-medium text-foreground hover:underline">
                 Lalit Kumar Rajak
               </a>
             </span>
@@ -65,7 +65,7 @@ export default async function MarketingLayout({ children }: { children: React.Re
               API docs
             </Link>
             <a
-              href="https://github.com/rajak312/linkpulse"
+              href="https://github.com/lalitkumarrajak/linkpulse"
               className="inline-flex items-center gap-1.5 hover:text-foreground"
             >
               <GithubIcon className="size-4" /> Source

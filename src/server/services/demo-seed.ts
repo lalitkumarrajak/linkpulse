@@ -155,7 +155,7 @@ interface DemoLink {
 const DEMO_LINKS: DemoLink[] = [
   {
     slug: "linkpulse",
-    url: buildUtmUrl("https://github.com/rajak312/linkpulse", {
+    url: buildUtmUrl("https://github.com/lalitkumarrajak/linkpulse", {
       source: "twitter",
       medium: "social",
       campaign: "launch",
@@ -168,7 +168,7 @@ const DEMO_LINKS: DemoLink[] = [
   },
   {
     slug: "github",
-    url: "https://github.com/rajak312",
+    url: "https://github.com/lalitkumarrajak",
     title: "GitHub profile",
     tags: ["personal"],
     weight: 8,

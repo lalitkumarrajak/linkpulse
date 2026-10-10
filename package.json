@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "URL shortener with real-time click analytics — Next.js, Prisma, PostgreSQL",
-  "author": "Lalit Kumar Rajak (https://github.com/rajak312)",
+  "author": "Lalit Kumar Rajak (https://github.com/lalitkumarrajak)",
   "license": "MIT",
   "engines": {
     "node": ">=20.9"

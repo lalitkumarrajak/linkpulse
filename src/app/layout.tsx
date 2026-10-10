@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: { default: "LinkPulse — Short links with real-time analytics", template: "%s · LinkPulse" },
   description:
     "Create branded short links, QR codes and track every click in real time: referrers, countries, devices and more.",
-  authors: [{ name: "Lalit Kumar Rajak", url: "https://github.com/rajak312" }],
+  authors: [{ name: "Lalit Kumar Rajak", url: "https://github.com/lalitkumarrajak" }],
   openGraph: {
     title: "LinkPulse — Short links with real-time analytics",
     description: "Shorten links, generate QR codes, and understand every click.",

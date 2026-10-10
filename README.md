@@ -384,4 +384,4 @@ tests/
 
 ## License
 
-[MIT](LICENSE) © 2026 [Lalit Kumar Rajak](https://github.com/rajak312)
+[MIT](LICENSE) © 2026 [Lalit Kumar Rajak](https://github.com/lalitkumarrajak)
